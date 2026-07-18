@@ -19,12 +19,12 @@ func main(){
 	flag.Parse()
 
 	cfg, err := config.Load(*configPath)
-
-	fmt.Println(*configPath)
-
+	// config load/validation error
 	if err != nil {
 		panic(err)
 	}
+
+	// Initialize routing table
 
 	// Create server using cfg
 	fmt.Print(cfg)
