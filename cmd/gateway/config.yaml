@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+routes:
+  - name: "Users"
+    path: /users
+    base_url: https://10.9.0.3:9000
+    methods: 
+      - get
+    
+  - name: "Update Users"
+    path: /users
+    base_url: https://10.9.0.3:9000
+    methods:
+      - post
+      - get
+      - query
