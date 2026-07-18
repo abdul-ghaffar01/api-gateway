@@ -28,9 +28,9 @@ func main(){
 	}
 
 	// Initialize routing table
-	router, errRouter := router.New(*cfg)
-	if errRouter != nil {
-		panic(errRouter)
+	router, err := router.New(*cfg)
+	if err != nil {
+		panic(err)
 	}
 
 	fmt.Println(*router)
@@ -39,10 +39,10 @@ func main(){
 	server := server.New(*cfg, router)
 
 	// Starting the server to listen for requests
-	errServer := server.Start()
+	err = server.Start()
 
-	if errServer != nil {
-		panic(errServer)
+	if err != nil {
+		panic(err)
 	}
 
 	fmt.Print(server)

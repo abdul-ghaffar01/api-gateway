@@ -3,8 +3,8 @@ server:
 
 routes:
   - name: "Users"
-    path: /users
-    upstream: https://10.9.0.3:900/users
+    path: /posts
+    upstream: https://dummyjson.com/posts
     methods: 
       - get
     
