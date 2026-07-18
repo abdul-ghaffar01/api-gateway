@@ -4,13 +4,12 @@ server:
 routes:
   - name: "Users"
     path: /users
-    base_url: https://10.9.0.3:9000
+    upstream: https://10.9.0.3:900/users
     methods: 
       - get
     
   - name: "Update Users"
     path: /users
-    base_url: https://10.9.0.3:9000
+    upstream: https://10.9.0.3:9000/users
     methods:
       - post
-      - query

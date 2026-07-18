@@ -23,12 +23,12 @@ func validateConfig(config Config) error {
 	 // Validating each route
 	for _, route := range config.Routes {
 
-		// Checking if the base_url or path are passed
-		if route.Base_url == ""{
-			return fmt.Errorf("base_url is not defined in route \"%v\"", route.Name)
+		// Checking if the upstream or path are passed
+		if route.Upstream == ""{
+			return fmt.Errorf("upstream is not defined in route \"%v\"", route.Name)
 		}
 
-		// Checking if the base_url or path are passed
+		// Checking if the upstream or path are passed
 		if route.Path == "" {
 			return fmt.Errorf("path is not defined in route \"%v\"", route.Name)
 		}

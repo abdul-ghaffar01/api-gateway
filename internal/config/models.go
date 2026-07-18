@@ -12,6 +12,6 @@ type Server struct {
 type Route struct {
 	Name string				`yaml:"name"`
 	Path string				`yaml:"path"`
-	Base_url string			`yaml:"base_url"`
+	Upstream string			`yaml:"upstream"`
 	Methods []string		`yaml:"methods"`
 }

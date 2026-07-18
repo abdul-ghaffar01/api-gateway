@@ -2,6 +2,7 @@ package router
 
 import (
 	"fmt"
+	"net/http"
 	"strings"
 
 	"github.com/abdul-ghaffar01/api-gateway/internal/config"
@@ -38,4 +39,20 @@ func New(config config.Config) (*Router, error) {
 	}
 
 	return &router, nil
+}
+
+
+
+func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	// 1. Find path
+
+    // 2. Verify method
+
+    // 3. Rate limit
+
+    // 4. Authenticate
+
+    // 5. Proxy request
+
+    // 6. Return response
 }
