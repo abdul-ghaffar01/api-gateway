@@ -13,15 +13,19 @@ type Server struct {
 }
 
 // Creating the new server
-func New(config config.Config, r *router.Router) (*Server, error) {
+func New(config config.Config, r *router.Router) *Server {
 	// Create a new server
 	httpServer := &http.Server{
 		Addr: fmt.Sprintf(":%d", config.Server.Port),
 		Handler: r,
 	}
 
-	server := Server{
+	return &Server{
 		httpServer: httpServer,
 	}
-	return &server, nil
+}
+
+// to start the server
+func (s *Server) Start() error {
+	return s.httpServer.ListenAndServe()
 }

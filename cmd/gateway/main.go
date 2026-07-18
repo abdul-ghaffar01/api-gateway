@@ -7,6 +7,7 @@ import (
 
 	"github.com/abdul-ghaffar01/api-gateway/internal/config"
 	"github.com/abdul-ghaffar01/api-gateway/internal/router"
+	"github.com/abdul-ghaffar01/api-gateway/internal/server"
 )
 
 
@@ -34,6 +35,15 @@ func main(){
 
 	fmt.Println(*router)
 
-	// Create server using cfg
-	fmt.Print(cfg)
+	// Create server using cfg, and router
+	server := server.New(*cfg, router)
+
+	// Starting the server to listen for requests
+	errServer := server.Start()
+
+	if errServer != nil {
+		panic(errServer)
+	}
+
+	fmt.Print(server)
 }
