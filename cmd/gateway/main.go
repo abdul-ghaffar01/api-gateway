@@ -1,10 +1,12 @@
 package main
 
 import (
-	"github.com/abdul-ghaffar01/api-gateway/internal/config"
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/abdul-ghaffar01/api-gateway/internal/config"
+	"github.com/abdul-ghaffar01/api-gateway/internal/router"
 )
 
 
@@ -25,6 +27,12 @@ func main(){
 	}
 
 	// Initialize routing table
+	router, errRouter := router.New(*cfg)
+	if errRouter != nil {
+		panic(errRouter)
+	}
+
+	fmt.Println(*router)
 
 	// Create server using cfg
 	fmt.Print(cfg)

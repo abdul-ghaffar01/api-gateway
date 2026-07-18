@@ -13,5 +13,4 @@ routes:
     base_url: https://10.9.0.3:9000
     methods:
       - post
-      - get
       - query
