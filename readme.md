@@ -37,10 +37,10 @@ server:
 
 routes:
   - path: /users
-    upstream: http://user-service:8080
+    base_url: http://user-service:8080
 
   - path: /orders
-    upstream: http://order-service:8080
+    base_url: http://order-service:8080
 ```
 
 ---
