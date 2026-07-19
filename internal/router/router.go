@@ -1,6 +1,7 @@
 package router
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -70,21 +71,41 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		req.Body,
 	)
 
+	fmt.Println("upstream url: ", route.Upstream)
+
 	if err != nil {
 		http.Error(w, "Upstream unavailable", http.StatusBadGateway)
 		return
 	}
 
-upstreamReq.Header = req.Header.Clone()
-upstreamReq.Header.Del("Accept-Encoding")
+	upstreamReq.Header = req.Header.Clone()
+	upstreamReq.Header.Del("Accept-Encoding")
 	resp, err := client.Do(upstreamReq)
 
 	if err != nil {
 		http.Error(w, "Upstream unavailable", http.StatusBadGateway)
+		return
 	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return
+	}
+	var data map[string]any
 
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return
+	}
+	data["transformed"] = "api gateway"
+	newBody, err := json.Marshal(data)
+	if err != nil {
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(resp.StatusCode)
-	io.Copy(w, resp.Body)
+	w.Write(newBody)
+	// io.Copy(w, newBody)
 
 	// Tasks:
 	// 1. Find path
